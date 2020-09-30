@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../views/Home.vue'
-import Register from '../views/auth/Register.vue'
-import Lock from '../views/auth/Lock.vue'
-import Login from '../views/auth/Login.vue'
-import ForgotPassword from '../views/auth/ForgotPassword.vue'
-import ResetPassword from '../views/auth/ResetPassword.vue'
+import Register from '../views/authentication/Register.vue'
+import Lock from '../views/authentication/Lock.vue'
+import Login from '../views/authentication/Login.vue'
+import ForgotPassword from '../views/authentication/ForgotPassword.vue'
+import ResetPassword from '../views/authentication/ResetPassword.vue'
 import NotFound from '../views/error/404.vue'
 import InternalServerError from '../views/error/500.vue'
 
@@ -49,6 +49,28 @@ const routes = [
     path: '/reset-password',
     name: 'ResetPasswordScreen',
     component: ResetPassword
+  },
+  {
+    path: '/',
+    name: 'BackOfficeLayout',
+    component: () => import('../views/backoffice/Layout'),
+    children: [
+      {
+        path: '/dashboard',
+        name: "DashboardScreen",
+        component: () => import('../views/backoffice/pages/Dashboard'),
+      },
+      {
+        path: '/profile',
+        name: "ProfileScreen",
+        component: () => import('../views/backoffice/pages/Profile'),
+      },
+      {
+        path: '/transactions',
+        name: "TransactionScreen",
+        component: () => import('../views/backoffice/pages/Transaction'),
+      },
+    ]
   },
 
   // {
